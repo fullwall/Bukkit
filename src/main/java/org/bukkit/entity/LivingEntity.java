@@ -1,10 +1,13 @@
 package org.bukkit.entity;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
 import org.bukkit.Location;
 import org.bukkit.block.Block;
+import org.bukkit.potions.PotionEffect;
+import org.bukkit.potions.PotionType;
 
 /**
  * Represents a living entity, such as a monster or player
@@ -225,4 +228,46 @@ public interface LivingEntity extends Entity {
      * @return Killer player, or null if none found.
      */
     public Player getKiller();
+
+
+    /**
+     * Adds the given {@link PotionEffect} to this entity. 
+     * Only one potion effect can be present for a given {@link PotionType}.
+     * 
+     * @param effect PotionEffect to be added
+     * @return Whether the effect could be added
+     */
+    public boolean addPotionEffect(PotionEffect effect);
+
+    /**
+     * Adds the given {@link PotionEffect} to this entity. 
+     * Only one potion effect can be present for a given {@link PotionType}.
+     * 
+     * @param effect PotionEffect to be added
+     * @param force Whether conflicting effects should be removed
+     * @return Whether the effect could be added
+     */
+    public boolean addPotionEffect(PotionEffect effect, boolean force);
+
+    /**
+     * Returns whether the entity already has an existing 
+     * effect of the given {@link PotionType} applied to it.
+     * 
+     * @param type The potion type to check
+     */
+    public boolean hasPotionEffect(PotionType type);
+
+    /**
+     * Removes any effects present of the given {@link PotionType}.
+     * 
+     * @param type The potion type to remove
+     */
+    public void removePotionEffect(PotionType type);
+
+    /**
+     * Returns all currently active {@link PotionEffect}s on this entity.
+     * 
+     * @return A collection of {@link PotionEffect}s
+     */
+    public Collection<PotionEffect> getActivePotionEffects();
 }
